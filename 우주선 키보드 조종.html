@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>우주선 키보드 조종</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{margin:0px;}
+#stage{
+	background-image:url("./images/bg.png");
+	height:500px;
+}
+#ship{
+	width:50px;
+	transform:rotate(90deg);/*90도 돌리기*/
+	position:absolute; /*부모 컨테이너를 기준으로 한 위치*/
+	left:50px;
+	top:100px;
+}
+
+</style>
+<script>
+var bgX=0; //배경의 값을 결정짓는 전역변수
+
+//배경 처리 함수 정의
+function moveBg(){
+	//문서내에 stage라는 요소의 백그라운드 x위치 속성값을 감소
+	var stage=document.getElementById("stage");
+	bgX=bgX-5;
+	stage.style.backgroundPosition=bgX+"px  0px";
+}
+
+//사용자가 좌,우,상,하 방향키를 누르면, 알맞는 값으로 우주선의 좌표값
+//수정하기!!
+//1 , 0
+function keyboard(){
+	alert("당신이 누른 키보드에 매칭되는 아스키값은"+event.keyCode);
+	/*
+	if(우측방향키라면...){
+		alert("나 눌렀어?");
+	}
+	*/
+}
+
+//게임 실행과 동시에 무조건 돌아야하는 무한루프!! 
+function gameLoop(){
+	console.log("gameLoop 실행중..."); //문서에 출력X, 자바스크립트
+	//콘솔에 출력...
+	moveBg();
+
+	setTimeout("gameLoop()", 10); //너무 빨리 돌기 때문에 10/1000
+	//초 간격으로 속도를 조정...
+}
+
+</script>
+</head>
+<body onLoad="gameLoop()" onKeyDown="keyboard()">
+<div id="stage">
+	<img src="./images/ship.png" id="ship">
+</div>
+</body>
+</html>
