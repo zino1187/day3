@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>테이블 생성기(이중 포문)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.wrapper{
+	width:950px;
+	height:550px;
+	background:yellow;
+	margin:auto;
+	overflow:hidden;
+}
+.control{
+	width:150px;
+	height:100%;
+	background:pink;
+	float:left;
+	text-align:center;
+}
+.control > input , button{
+	width:90%;
+}
+.control > button{
+	background:dodgerblue;
+	color:#fff;
+	border:none;
+}
+
+#content{
+	width:800px;
+	height:100%;
+	background:#ccc;
+	float:left;
+}
+</style>
+<script>
+var content;
+var tag=""; //table 태그를 누적할 용도의 전역변수
+
+function init(){
+	var bt=document.getElementById("bt");
+	content=document.getElementById("content");
+
+	bt.addEventListener("click", function(){
+		//표생성!!
+		createTable();
+	});
+}
+
+//사용자가 입력한 조건으로 테이블을 프로그래밍적으로 생성하자!
+function createTable(){
+	tag=tag+"<table width='100%' border='2px' bgcolor='red'>";
+
+	for(var a=1;a<=10;a++){ //층수 반복문
+		tag=tag+"<tr>"; //천장
+		for(var i=1;i<=5;i++){//호수 반복문 
+			tag=tag+"<td>101호</td>"; //호수
+		}	
+		tag=tag+"</tr>"; //바닥
+	}
+	tag=tag+"</table>";
+
+	//tag 쌓아진 문자열 태그들을 마지막에 한번 div 출력!!
+	content.innerHTML=tag;
+}
+</script>
+</head>
+<body onLoad="init()">
+	<div class="wrapper">
+		<div class="control">
+			<input type="text" placeholder="층수">
+			<input type="text" placeholder="호수">
+			<input type="text" placeholder="건물두께">
+			<input type="text" placeholder="건물너비">
+			<input type="text" placeholder="외벽색상">
+			<button id="bt">건축하기</button>
+		</div>
+		<div id="content"></div>
+	</div>
+
+</body>
+</html>
