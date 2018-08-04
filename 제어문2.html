@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>제어문2</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+#box{
+	width:200px;
+	background:yellow;
+	border:5px solid red;
+	font-size:50px;
+	float:left;
+}
+select{
+	float:left;
+	width:200px;
+	background:dodgerblue;
+	color:#fff;
+	font-size:50px;
+	border:5px solid blue;
+}
+</style>
+<script>
+/*
+제어문이란? 실행부를 제어할 수 있는 문장 
+1) 조건문 - 특정 영역을 수행시킬지 여부를 결정하는 문
+                if, switch
+
+2) 반복문 - 특정 영역을 얼마나 반복수행 시킬지를 결정하는 문
+                for , while
+*/
+function init(){
+	var box=document.getElementById("box");
+	for(var i=2018; i>=1945;i--){
+		box.innerText=box.innerText+i+"\n";
+	}
+
+	//select박스에 option 태그들을 원하는 갯수만큼 만들어 부착하자!!
+	var sel=document.getElementById("sel");	
+	
+	for(var i=1;i<=30;i++){
+		var op=document.createElement("option"); //문서에 없었던 태그를 생성..
+		op.text=i;
+		sel.add(op); //select 박스에 자식요소인 option을 부착하는 코드!!
+	}
+
+}
+</script>
+</head>
+<body onLoad="init()">
+	<div id="box"></div>
+	<select id="sel"></select>
+</body>
+</html>

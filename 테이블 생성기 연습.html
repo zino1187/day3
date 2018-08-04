@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>테이블 생성기 연습</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+//document.write("<img src=\"https://tpechauvesourisultrasons.files.wordpress.com/2014/01/chauve-souris.png\">");
+document.write("<table width='100%' border='1' align='center'>");
+for(var i=5;i>=1;i--){
+	document.write("<tr>"); //천장
+	for(var a=1;a<=4;a++){
+		document.write("<td>"+i+getStr(a)+"호</td>"); 
+	}
+	document.write("</tr>");//바닥
+}
+document.write("</table>");
+
+function getStr(n){
+	//넘겨받은 숫자가 10보다 작으면 05, 09, 아니면 그냥 씀 
+	var data;
+	if(n<10){
+		data="0"+n;	
+	}else{
+		data=n;
+	}
+	return data;
+}
+</script>
+</head>
+<body>
+	<!--
+
+	<table width="600px" border="1" align="center">
+		<tr>
+			<td>401호</td>
+			<td>402호</td>
+			<td>403호</td>
+			<td>404호</td>
+		</tr>
+		<tr>
+			<td>301호</td>
+			<td>302호</td>
+			<td>303호</td>
+			<td>304호</td>
+		</tr>
+		<tr>
+			<td>201호</td>
+			<td>202호</td>
+			<td>203호</td>
+			<td>204호</td>
+		</tr>
+		<tr>
+			<td>101호</td>
+			<td>102호</td>
+			<td>103호</td>
+			<td>104호</td>
+		</tr>
+
+	</table>
+	-->
+</body>
+</html>

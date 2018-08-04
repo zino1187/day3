@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>우주선 키보드 조종</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{margin:0px;}
+#stage{
+	background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Xvs5xXsTnsrc9hvlYEfZhn9BqcEo40nO2pJ2ci44n7R9sRbbAw);
+	height:500px;
+}
+#ship{
+	width:50px;
+	transform:rotate(90deg);/*90도 돌리기*/
+	position:absolute; /*부모 컨테이너를 기준으로 한 위치*/
+	left:50px;
+	top:100px;
+}
+
+</style>
+<script>
+var ship;//전역변수로 빼놓으면, 프로그램이 끝날때까지 그 값이 유지
+			//되므로, 모든 함수에서 보이면서 사용가능하다...
+var bgX=0; //배경의 값을 결정짓는 전역변수
+var shipX=50; //우주선의 x 좌표값을 표현한 변수!!
+var shipY=100;//css에서 100부터 시작했으므로..
+var stage;
+
+//게임이 가동되면 최최에 해야할 기본 작업들을 여기서 처리하자!!
+function init(){
+	ship=document.getElementById("ship");	
+	stage=document.getElementById("stage");
+
+	createEnemy();
+}
+
+//많은 수의 적군이미지들을 생성하여, stage 요소에 자식요소로 부착!!
+function createEnemy(){
+	var path;
+
+	for(var i=0;i<20;i++){
+		if(i%3==0){//i가 3으로 나누어 떨어지면  즉 3마다...
+			path="https://tpechauvesourisultrasons.files.wordpress.com/2014/01/chauve-souris.png";
+		}else{
+			path="https://cdn.pixabay.com/photo/2017/02/01/11/32/bat-2029809_960_720.png";
+		}
+
+		var img=document.createElement("img");
+		img.src=path; //이미지 소스 경로
+		img.style.position="absolute";
+		img.style.left=800+(i*20)+"px";
+		img.style.top=(i*85)+"px";
+		img.style.width=100+"px";
+		stage.appendChild(img);//div 의 자식요소 등록!!
+	}
+
+}
+
+//배경 처리 함수 정의
+function moveBg(){
+	//문서내에 stage라는 요소의 백그라운드 x위치 속성값을 감소
+	bgX=bgX-5;
+	stage.style.backgroundPosition=bgX+"px  0px";
+}
+
+//사용자가 좌,우,상,하 방향키를 누르면, 알맞는 값으로 우주선의 좌표값
+//수정하기!!
+//1 , 0
+
+function keyboard(){
+	if(event.keyCode==39){
+		shipX=shipX+10; //shipX+=10  표현가능
+	}
+	//좌측으로 움직이기
+	if(event.keyCode==37){
+		shipX=shipX-10; 
+	}
+	//위쪽으로 움직이기
+	if(event.keyCode==38){
+		shipY=shipY-10; 
+	}
+	//아래쪽으로 움직이기
+	if(event.keyCode==40){
+		shipY=shipY+10; 
+	}
+	ship.style.left=shipX+"px";
+	ship.style.top=shipY+"px";
+}
+
+//게임 실행과 동시에 무조건 돌아야하는 무한루프!! 
+function gameLoop(){
+	console.log("gameLoop 실행중..."); //문서에 출력X, 자바스크립트
+	//콘솔에 출력...
+	moveBg();
+
+	setTimeout("gameLoop()", 10); //너무 빨리 돌기 때문에 10/1000
+	//초 간격으로 속도를 조정...
+}
+
+</script>
+</head>
+<body onLoad="init();gameLoop()" onKeyDown="keyboard()">
+<div id="stage">
+	<img src="https://cdn.pixabay.com/photo/2013/07/12/13/52/rocket-147466_960_720.png" id="ship">
+</div>
+</body>
+</html>
