@@ -38,8 +38,7 @@
 </style>
 <script>
 var content;
-var tag=""; //table 태그를 누적할 용도의 전역변수
-
+var tag=""; //table 태그를 누적할 용도의 전역변수 
 function init(){
 	var bt=document.getElementById("bt");
 	content=document.getElementById("content");
@@ -52,11 +51,18 @@ function init(){
 
 //사용자가 입력한 조건으로 테이블을 프로그래밍적으로 생성하자!
 function createTable(){
-	tag=tag+"<table width='100%' border='2px' bgcolor='red'>";
+	//사용자가 입력한 데이터로 대체하겠다!!!
+	var fn=document.getElementById("fn").value;		//층수
+	var ho=document.getElementById("ho").value;		//호수
+	var b=document.getElementById("b").value;			//건물두께
+	var wid=document.getElementById("wid").value;	//너비 
+	var c=document.getElementById("c").value;			//외벽색상
 
-	for(var a=1;a<=10;a++){ //층수 반복문
+	tag=tag+"<table width='"+wid+"%' border='"+b+"px' bgcolor='"+c+"'>";
+	
+	for(var a=1;a<=fn;a++){ //층수 반복문
 		tag=tag+"<tr>"; //천장
-		for(var i=1;i<=5;i++){//호수 반복문 
+		for(var i=1;i<=ho;i++){//호수 반복문 
 			tag=tag+"<td>101호</td>"; //호수
 		}	
 		tag=tag+"</tr>"; //바닥
@@ -71,11 +77,11 @@ function createTable(){
 <body onLoad="init()">
 	<div class="wrapper">
 		<div class="control">
-			<input type="text" placeholder="층수">
-			<input type="text" placeholder="호수">
-			<input type="text" placeholder="건물두께">
-			<input type="text" placeholder="건물너비">
-			<input type="text" placeholder="외벽색상">
+			<input type="text" placeholder="층수" id="fn">
+			<input type="text" placeholder="호수" id="ho">
+			<input type="text" placeholder="건물두께" id="b">
+			<input type="text" placeholder="건물너비" id="wid">
+			<input type="text" placeholder="외벽색상" id="c">
 			<button id="bt">건축하기</button>
 		</div>
 		<div id="content"></div>
